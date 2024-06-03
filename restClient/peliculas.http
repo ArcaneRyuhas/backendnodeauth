@@ -10,14 +10,13 @@ GET http://localhost:5242/api/peliculas/19
 
 ###
 
-POST http://localhost:5242/api/peliculas
+POST http://localhost:3000/api/peliculas
 Content-Type: application/json
 
 {
-    "peliculaid": 19,
     "poster": "https://m.media-amazon.com/images/M/MV5BMGI4NTNlODItMGJlZi00OTIwLTlkM2ItMWFkZjJhZDIzMDc3XkEyXkFqcGdeQXVyMTEyNzQ1MTk0._V1_SX300.jpg",
-    "titulo": "Película de prueba",
-    "sinopsis": "Sinopsis de prueba.",
+    "titulo": "Película de prueba 3.",
+    "sinopsis": "Sinopsis de prueba 3.",
     "anio": 2024
 }
 

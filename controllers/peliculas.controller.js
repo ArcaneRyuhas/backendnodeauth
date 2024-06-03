@@ -3,6 +3,7 @@ const Op = Sequelize.Op;
 
 let self = {}
 
+// GET: api/peliculas
 self.getAll = async function (req, res){
     try {
         const {s} = req.query;
@@ -52,7 +53,7 @@ self.get = async function (req, res) {
     }
 };
 
-
+// POST: api/peliculas
 self.create = async function (req, res) {
     try {
         let data = await pelicula.create({
@@ -84,7 +85,7 @@ self.update = async function (req, res) {
     }
 };
 
-
+// DELETE: api/peliculas/5
 self.delete = async function (req, res) {
     try {
         let id = req.params.id;
@@ -103,7 +104,7 @@ self.delete = async function (req, res) {
     }
 };
 
-
+// POST: api/peliculas/5/categoria
 self.asignacategoria = async function (req, res) {
     try {
         let itemToAssign = await categoria.findByPk(req.body.categoriaid);
@@ -119,7 +120,7 @@ self.asignacategoria = async function (req, res) {
     }
 };
 
-
+// DELETE: api/peliculas/5/categoria
 self.eliminacategoria = async function (req, res) {
     try {
         let itemToRemove = await categoria.findByPk(req.params.idcategoria);
@@ -134,6 +135,38 @@ self.eliminacategoria = async function (req, res) {
         return res.status(500).json(error);
     }
 };
+
+self.eliminacategoria = async function (req, res) {
+    try {
+      let itemToRemove = await categoria.findByPk(req.params.idcategoria);
+      if (!itemToRemove) return res.status(404).send();
+      
+      let item = await pelicula.findByPk(req.params.id);
+      if (!item) return res.status(404).send();
+      
+      await item.removeCategoria(itemToRemove);
+      return res.status(204).send();
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+  
+
+self.asignacategoria = async function (req, res) {
+    try {
+      let itemToAssign = await categoria.findByPk(req.body.categoriaid);
+      if (!itemToAssign) return res.status(404).send();
+      
+      let item = await pelicula.findByPk(req.params.id);
+      if (!item) return res.status(404).send();
+      
+      await item.addCategoria(itemToAssign);
+      return res.status(204).send();
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+  
 
 
 module.exports = self;

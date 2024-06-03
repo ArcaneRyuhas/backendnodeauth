@@ -1,6 +1,7 @@
 const { categoria } = require('../models')
 let self = {}
 
+// GET: api/categorias
 self.getAll = async function (req, res){
     try{
         let data = await categoria.findAll({ attributes: [['id', 'categoriald'], 'nombre', 'protegida'] });
@@ -10,6 +11,7 @@ self.getAll = async function (req, res){
     }
 }
 
+// GET: api/categorias/
 self.get = async function (req, res){
     try{
         let id = req.params.id;
@@ -23,6 +25,7 @@ self.get = async function (req, res){
     }
 }
 
+// POST: api/categorias
 self.create = async function (req, res){
     try{
         let data = await categoria.create({
@@ -34,6 +37,7 @@ self.create = async function (req, res){
     }
 }
 
+// PUT: api/categorias/5
 self.update = async function (req, res){
     try{
         let id = req.params.id;
@@ -48,6 +52,7 @@ self.update = async function (req, res){
     }
 }
 
+// DELETE: api/categorias/5
 self.delete = async function (req, res){
     try{
         let id = req.params.id;
